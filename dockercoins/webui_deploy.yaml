@@ -2,14 +2,14 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   labels:
-    app: hasher
-  name: hasher
+    app: webui
+  name: webui
   namespace: default
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: hasher
+      app: webui
   strategy:
     rollingUpdate:
       maxSurge: 25%
@@ -17,13 +17,14 @@ spec:
     type: RollingUpdate
   template:
     metadata:
+      creationTimestamp: null
       labels:
-        app: hasher
+        app: webui
     spec:
       containers:
-      - image: 172.17.0.222:5000/hasher:v0.1
+      - image: dockercoins/webui:v0.1
         imagePullPolicy: IfNotPresent
-        name: hasher
+        name: webui
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       schedulerName: default-scheduler

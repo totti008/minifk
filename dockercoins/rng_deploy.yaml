@@ -2,14 +2,14 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   labels:
-    app: hasher
-  name: hasher
+    app: rng
+  name: rng
   namespace: default
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: hasher
+      app: rng
   strategy:
     rollingUpdate:
       maxSurge: 25%
@@ -18,12 +18,12 @@ spec:
   template:
     metadata:
       labels:
-        app: hasher
+        app: rng
     spec:
       containers:
-      - image: 172.17.0.222:5000/hasher:v0.1
+      - image: dockercoins/rng:v0.1
         imagePullPolicy: IfNotPresent
-        name: hasher
+        name: rng
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       schedulerName: default-scheduler
